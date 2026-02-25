@@ -71,12 +71,12 @@ public class LibraryService {
 
     // boolean chk = libraryService.insertBook(bookId, ISBN, bookName, author,
     // status.totalcount, count);
-    public boolean insertBook(int ID, String ISBN, String BookName, String author, String status, int totalcount,
+    public boolean insertBook(String ISBN, String BookName, String author, String status, int totalcount,
             int count) {
         try (Connection conn = DBUtil.getConnection()) {
             conn.setAutoCommit(false);
 
-            int insertBookCount = bookDAO.insertNewBook(conn, ID, ISBN, BookName, author, status, totalcount, count);
+            int insertBookCount = bookDAO.insertNewBook(conn, ISBN, BookName, author, status, totalcount, count);
             if (insertBookCount > 0) {
                 conn.commit();
                 return true;

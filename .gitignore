@@ -54,3 +54,7 @@ $RECYCLE.BIN/
 *.lnk
 
 # End of https://www.toptal.com/developers/gitignore/api/windows,java
+src/main/java/com/example/Library.7z
+target/classes/com/example/Library.7z
+HELP.md
+.vscode/settings.json

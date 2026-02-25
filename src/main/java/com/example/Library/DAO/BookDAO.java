@@ -48,23 +48,24 @@ public class BookDAO {
     // "ID\t| ISBN\t\t| 도서명\t\t| 저자\t| 재고\t| 상태");
     // int insertBookCount = bookDAO.insertNewBook(conn, ID, ISBN, BookName, author,
     // status, totalcount, count);
-    public int insertNewBook(Connection conn, int ID, String ISBN, String BookName, String author, String status,
+    public int insertNewBook(Connection conn, String ISBN, String BookName, String author, String status,
             int totalcount, int count) {
         int result = 0;
 
         // 1. 매개변수로 받은 데이터(ID, status 등)에 맞게 INSERT 컬럼을 조정했습니다.
         // 2. createdate, modifydate는 DB의 CURRENT_TIMESTAMP가 알아서 찍어주므로 ?를 쓰지 않습니다.
-        String sql = "INSERT INTO Library_db.books (id, isbn, bookname, author, status, total_count, available_count, createdate) "
-                + "VALUES(?, ?, ?, ?, ?, ?, ?, CURRENT_TIMESTAMP)";
+        String sql = "INSERT INTO Library_db.books (isbn, bookname, author, status, total_count, available_count, createdate) "
+                + "VALUES(?, ?, ?, ?, ?, ?, CURRENT_TIMESTAMP)";
 
         try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
-            pstmt.setInt(1, ID);
-            pstmt.setString(2, ISBN);
-            pstmt.setString(3, BookName);
-            pstmt.setString(4, author);
-            pstmt.setString(5, status);
-            pstmt.setInt(6, totalcount);
-            pstmt.setInt(7, count);
+            // 자동 증가라 제외
+            // pstmt.setInt(1, ID);
+            pstmt.setString(1, ISBN);
+            pstmt.setString(2, BookName);
+            pstmt.setString(3, author);
+            pstmt.setString(4, status);
+            pstmt.setInt(5, totalcount);
+            pstmt.setInt(6, count);
             // Timestamp는 SQL에서 CURRENT_TIMESTAMP로 처리되므로 자바에서 세팅할 필요가 없습니다! 쾌적하죠?
 
             result = pstmt.executeUpdate();

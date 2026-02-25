@@ -26,13 +26,18 @@ public class LibraryApplication {
 					try {
 						System.out
 								.println("\n=========================================================================");
-						System.out.println("도서 ID를 입력하세요");
-						int bookId = Integer.parseInt(scanner.nextLine());
+						// 자동증가라 필요가 없음
+						// System.out.println("도서 ID를 입력하세요");
+						// int bookId = Integer.parseInt(scanner.nextLine());
 
 						System.out.println("도서 ISBN을 입력하세요");
 						String ISBN = scanner.nextLine();
 						System.out.println("도서명을 입력하세요");
 						String bookName = scanner.nextLine();
+						if (bookName == null || bookName.trim().isEmpty()) {
+							System.out.println("경고: 도서명은 비워둘 수 없습니다! 등록을 취소합니다.");
+							break; // switch문을 빠져나가서 메인 메뉴로 돌아감
+						}
 
 						System.out.println("도서 저자를 입력하세요");
 						String author = scanner.nextLine();
@@ -45,7 +50,7 @@ public class LibraryApplication {
 
 						System.out.println("도서 상태를 입력하세요");
 						String status = scanner.nextLine();
-						boolean chk = libraryService.insertBook(bookId, ISBN, bookName, author, status, totalcount,
+						boolean chk = libraryService.insertBook(ISBN, bookName, author, status, totalcount,
 								count);
 						if (chk) {
 							System.out.println("✅ 신규 도서 등록 완료");
@@ -58,11 +63,11 @@ public class LibraryApplication {
 					break;
 				case "1":
 					System.out.println("\n=========================================================================");
-					System.out.println("ID\t| ISBN\t\t| 도서명\t\t| 저자\t| 재고\t| 상태");
+					System.out.println("ID\t| ISBN\t\t| 도서명\t\t\t\t| 저자\t| 재고\t| 상태");
 					System.out.println("-------------------------------------------------------------------------");
 					books = libraryService.bookDAO.getAllBooks();
 					for (BookDTO book : books) {
-						System.out.printf("%d\t| %s\t| %s\t| %s\t| %d권\t| %s\n",
+						System.out.printf("%d\t| %s\t| %s\t\t| %s\t| %d권\t| %s\n",
 								book.getId(), book.getIsbn(), book.getBookname(), book.getAuthor(),
 								book.getAvailable_count(), book.getStatus());
 					}
