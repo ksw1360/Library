@@ -15,7 +15,7 @@ public class RentalDAO {
             pstmt.setInt(2, userId); // 🌟 깔끔하게 int로!
             return pstmt.executeUpdate();
         } catch (SQLException e) {
-            System.out.println("❌ 대여 기록 INSERT 실패: " + e.getMessage());
+            System.out.println("대여 기록 INSERT 실패: " + e.getMessage());
             return 0;
         }
     }

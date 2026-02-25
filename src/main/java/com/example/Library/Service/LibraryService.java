@@ -15,7 +15,7 @@ public class LibraryService {
             conn.setAutoCommit(false);
 
             var book = bookDAO.getAllBooks().stream()
-                    .filter(b -> b.getId() == bookId) // 🌟 심플한 int 비교!
+                    .filter(b -> b.getId() == bookId)
                     .findFirst()
                     .orElse(null);
 
@@ -45,7 +45,7 @@ public class LibraryService {
             conn.setAutoCommit(false);
 
             var book = bookDAO.getAllBooks().stream()
-                    .filter(b -> b.getId() == bookId) // 🌟 심플한 int 비교!
+                    .filter(b -> b.getId() == bookId)
                     .findFirst()
                     .orElse(null);
 
@@ -57,6 +57,27 @@ public class LibraryService {
             int updateRentalCount = rentalDAO.updateReturnDate(conn, bookId);
 
             if (updateRentalCount > 0) {
+                conn.commit();
+                return true;
+            } else {
+                conn.rollback();
+                return false;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    // boolean chk = libraryService.insertBook(bookId, ISBN, bookName, author,
+    // status.totalcount, count);
+    public boolean insertBook(int ID, String ISBN, String BookName, String author, String status, int totalcount,
+            int count) {
+        try (Connection conn = DBUtil.getConnection()) {
+            conn.setAutoCommit(false);
+
+            int insertBookCount = bookDAO.insertNewBook(conn, ID, ISBN, BookName, author, status, totalcount, count);
+            if (insertBookCount > 0) {
                 conn.commit();
                 return true;
             } else {

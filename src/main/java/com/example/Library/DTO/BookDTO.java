@@ -46,4 +46,32 @@ public class BookDTO {
     public String getStatus() {
         return status;
     }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public void setIsbn(String isbn) {
+        this.isbn = isbn;
+    }
+
+    public void setBookname(String bookname) {
+        this.bookname = bookname;
+    }
+
+    public void setAuthor(String author) {
+        this.author = author;
+    }
+
+    public void setPrice(String price) {
+        this.price = price;
+    }
+
+    public void setAvailable_count(int available_count) {
+        this.available_count = available_count;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
 }
