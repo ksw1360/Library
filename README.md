@@ -66,5 +66,5 @@ CREATE TABLE `users` (
   UNIQUE KEY `userid` (`userid`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='고객 정보';
 
-3. Library\Library\src\main\java\com\example\Library\LibraryApplication.java 우클릭 Run Java 클릭
-4. [1] 도서 목록  [2] 대여  [3] 반납  [0] 종료 메뉴 선택
+3. Library\Library\src\main\java\com\example\Library\LibraryApplication.java 선택 
+4. F5 클릭
