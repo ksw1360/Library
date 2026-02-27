@@ -2,7 +2,13 @@ package com.example.Library.DAO;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+
+import com.example.Library.DB_Utils.DBUtil;
+import com.example.Library.DTO.BookDTO;
 
 public class RentalDAO {
 
@@ -26,5 +32,40 @@ public class RentalDAO {
             pstmt.setInt(1, bookId);
             return pstmt.executeUpdate();
         }
+    }
+
+    public List<BookDTO> getAllRentRecords() {
+        List<BookDTO> books = new ArrayList<>();
+        String sql = "SELECT " +
+                " r.id,  " +
+                " b.bookname,  " +
+                " u.username,  " +
+                " r.rent_date,  " +
+                " r.due_date,  " +
+                " r.return_date,  " +
+                " r.status " +
+                " FROM rentals r " +
+                " JOIN books b ON r.book_id = b.id " +
+                " JOIN users u ON r.user_id = u.id " +
+                " ORDER BY r.rent_date DESC ";
+
+        try (Connection conn = DBUtil.getConnection();
+                PreparedStatement pstmt = conn.prepareStatement(sql);
+                ResultSet rs = pstmt.executeQuery()) {
+
+            while (rs.next()) {
+                book = new BookDTO(
+                        rs.getInt("id"),
+                        rs.getString("isbn"),
+                        rs.getString("bookname"),
+                        rs.getString("author"),
+                        rs.getString("price"),
+                        rs.getInt("available_count"));
+                books.add(book);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return books;
     }
 }

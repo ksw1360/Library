@@ -119,7 +119,28 @@ public class LibraryApplication {
 						System.out.println("⚠️ 오류: ID는 반드시 숫자만 입력해주세요!");
 					}
 					break;
-				case "4":
+				case "4": // 추가예정...
+
+					// System.out.println("\n" + "=".repeat(115));
+					// System.out.printf("%s | %s | %s | %s | %s\n",
+					// format("대여번호", 10), format("회원ID", 10), format("도서명", 50),
+					// format("대여일", 20), format("반납여부", 10));
+					// System.out.println("-".repeat(115));
+
+					// // libraryService에 대여 기록 리스트를 가져오는 메서드가 있다고 가정
+					// var rentRecords = libraryService.getAllRentRecords();
+					// for (var record : rentRecords) {
+					// System.out.printf("%s | %s | %s | %s | %s\n",
+					// format(String.valueOf(record.getRentId()), 10),
+					// format(String.valueOf(record.getMemberId()), 10),
+					// format(record.getBookName(), 50),
+					// format(record.getRentDate(), 20),
+					// format(record.getReturnStatus(), 10));
+					// }
+					// System.out.println("=".repeat(115));
+					break;
+
+				case "5": // 종료
 					isRunning = false;
 					break;
 			}
