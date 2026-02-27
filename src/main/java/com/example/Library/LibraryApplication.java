@@ -62,18 +62,25 @@ public class LibraryApplication {
 					}
 					break;
 				case "1":
-					System.out.println("\n=========================================================================");
-					System.out.println("ID\t| ISBN\t\t| 도서명\t\t\t\t| 저자\t| 재고\t| 상태");
-					System.out.println("-------------------------------------------------------------------------");
+					System.out.println("\n" + "=".repeat(110));
+					// 제목 줄도 고정 폭으로 출력
+					System.out.printf("%s | %s | %s | %s | %s | %s\n",
+							format("ID", 4), format("ISBN", 15), format("도서명", 50),
+							format("저자", 15), format("재고", 6), format("상태", 10));
+					System.out.println("-".repeat(110));
+
 					books = libraryService.bookDAO.getAllBooks();
 					for (BookDTO book : books) {
-						System.out.printf("%d\t| %s\t| %s\t\t| %s\t| %d권\t| %s\n",
-								book.getId(), book.getIsbn(), book.getBookname(), book.getAuthor(),
-								book.getAvailable_count(), book.getStatus());
+						System.out.printf("%s | %s | %s | %s | %s | %s\n",
+								format(String.valueOf(book.getId()), 4),
+								format(book.getIsbn(), 15),
+								format(book.getBookname(), 50),
+								format(book.getAuthor(), 15),
+								format(book.getAvailable_count() + "권", 6),
+								format(book.getStatus(), 10));
 					}
-					System.out.println("=========================================================================");
+					System.out.println("=".repeat(110));
 					break;
-
 				case "2":
 					System.out.println("\n>> 📝 대여 처리를 시작합니다.");
 					try {
@@ -118,5 +125,13 @@ public class LibraryApplication {
 			}
 		}
 		scanner.close();
+	}
+
+	public static String format(String s, int width) {
+		int curWidth = 0;
+		for (char c : s.toCharArray()) {
+			curWidth += (c > 127) ? 2 : 1; // 한글(Non-ASCII)이면 2칸, 아니면 1칸
+		}
+		return s + " ".repeat(Math.max(0, width - curWidth));
 	}
 }
