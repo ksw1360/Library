@@ -4,7 +4,6 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 import com.example.Library.DB_Utils.DBUtil;
@@ -45,15 +44,10 @@ public class BookDAO {
         }
     }
 
-    // "ID\t| ISBN\t\t| 도서명\t\t| 저자\t| 재고\t| 상태");
-    // int insertBookCount = bookDAO.insertNewBook(conn, ID, ISBN, BookName, author,
-    // status, totalcount, count);
     public int insertNewBook(Connection conn, String ISBN, String BookName, String author, String status,
             int totalcount, int count) {
         int result = 0;
 
-        // 1. 매개변수로 받은 데이터(ID, status 등)에 맞게 INSERT 컬럼을 조정했습니다.
-        // 2. createdate, modifydate는 DB의 CURRENT_TIMESTAMP가 알아서 찍어주므로 ?를 쓰지 않습니다.
         String sql = "INSERT INTO Library_db.books (isbn, bookname, author, status, total_count, available_count, createdate) "
                 + "VALUES(?, ?, ?, ?, ?, ?, CURRENT_TIMESTAMP)";
 

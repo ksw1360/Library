@@ -71,8 +71,6 @@ public class LibraryService {
         }
     }
 
-    // boolean chk = libraryService.insertBook(bookId, ISBN, bookName, author,
-    // status.totalcount, count);
     public boolean insertBook(String ISBN, String BookName, String author, String status, int totalcount,
             int count) {
         try (Connection conn = DBUtil.getConnection()) {

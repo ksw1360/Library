@@ -2,8 +2,14 @@ package com.example.Library.DAO;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
+import java.util.ArrayList;
+import java.util.List;
+
+import com.example.Library.DB_Utils.DBUtil;
+import com.example.Library.DTO.BookDTO;
 
 public class RentalDAO {
 
@@ -31,7 +37,7 @@ public class RentalDAO {
 
     public List<String> getRentalList(Connection conn) {
         String sql = "SELECT r.id, b.bookname, r.rent_date, r.due_date, r.return_date, r.status " +
-                " FROM rentals r JOIN books b ON r.book_id = b.id WHERE 1=1\r\n" + //
+                " FROM rentals r JOIN books b ON r.book_id = b.id WHERE 1=1" +
                 " AND r.status ='대여중' ORDER BY r.rent_date DESC";
         // System.out.println(sql);
         try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
