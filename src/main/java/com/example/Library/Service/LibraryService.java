@@ -2,6 +2,8 @@ package com.example.Library.Service;
 
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.util.List;
+
 import com.example.Library.DAO.BookDAO;
 import com.example.Library.DAO.RentalDAO;
 import com.example.Library.DB_Utils.DBUtil;
@@ -87,6 +89,15 @@ public class LibraryService {
         } catch (SQLException e) {
             e.printStackTrace();
             return false;
+        }
+    }
+
+    public List<String> getRentalList() {
+        try (Connection conn = DBUtil.getConnection()) {
+            return rentalDAO.getRentalList(conn);
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
         }
     }
 }

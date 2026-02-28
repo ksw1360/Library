@@ -17,7 +17,7 @@ public class LibraryApplication {
 		System.out.println("=========================================");
 		List<BookDTO> books = null;
 		while (isRunning) {
-			System.out.println("\n[0] 도서 등록 [1] 도서 목록  [2] 대여  [3] 반납  [4] 종료");
+			System.out.println("\n[0] 도서 등록 [1] 도서 목록  [2] 대여  [3] 반납  [4] 대여 리스트  [5] 종료");
 			System.out.print("▶ 메뉴 선택: ");
 			String choice = scanner.nextLine();
 
@@ -113,6 +113,17 @@ public class LibraryApplication {
 					}
 					break;
 				case "4":
+					System.out.println("대여 리스트");
+					List<String> rentalList = libraryService.getRentalList();
+					if (rentalList != null) {
+						for (String rentalInfo : rentalList) {
+							System.out.println(rentalInfo);
+						}
+					} else {
+						System.out.println("대여 리스트를 불러오는 데 실패했습니다.");
+					}
+					break;
+				case "5":
 					isRunning = false;
 					break;
 			}
