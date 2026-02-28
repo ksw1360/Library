@@ -2,14 +2,8 @@ package com.example.Library.DAO;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
-import java.util.ArrayList;
-import java.util.List;
-
-import com.example.Library.DB_Utils.DBUtil;
-import com.example.Library.DTO.BookDTO;
 
 public class RentalDAO {
 

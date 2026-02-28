@@ -120,10 +120,19 @@ public class LibraryApplication {
 					}
 					break;
 				case "4":
+					System.out.println("=".repeat(110));
 					System.out.println("\n>> 📋 현재 대여 리스트");
-					libraryService.getRentalList();
-					for (String rentalInfo : libraryService.getRentalList()) {
-						System.out.println(rentalInfo);
+
+					// 1. 딱 한 번만 불러서 리스트에 저장합니다.
+					List<String> currentRentals = libraryService.getRentalList();
+
+					// 2. 리스트가 비어있는지 확인해주는 센스!
+					if (currentRentals == null || currentRentals.isEmpty()) {
+						System.out.println("   (현재 대여 중인 도서가 없습니다.)");
+					} else {
+						for (String rentalInfo : currentRentals) {
+							System.out.println(" ▶ " + rentalInfo);
+						}
 					}
 					System.out.println("=".repeat(110));
 					break;
